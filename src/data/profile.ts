@@ -59,7 +59,23 @@ export const profile = {
   },
 
   // EDIT: the "story" for the About section.
-  story: [],
+  story: [
+    {
+      kicker: "Beginning",
+      title: "The Journey Starts",
+      body: "Passionate about building intelligent systems that solve real problems. Started exploring AI and ML to understand how machines can learn and adapt.",
+    },
+    {
+      kicker: "Learning",
+      title: "Deep Dive into ML",
+      body: "Spent countless hours studying algorithms, neural networks, and deep learning frameworks. Built projects that combine research concepts with practical applications.",
+    },
+    {
+      kicker: "Building",
+      title: "From Theory to Production",
+      body: "Now focused on shipping research-grade code. Working on RAG systems, agentic AI, and ML pipelines that make a real difference.",
+    },
+  ] as const,
 
   // // EDIT: the "mindset" strip in About, short principles you work by.
   // principles: [

@@ -1,0 +1,129 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ────────────────────────────────────────────────────────────
+   DESIGN TOKENS — "Obsidian Signal" identity.
+   Deep warm blacks, ivory type, one intentional acid accent.
+   Values are space-separated RGB for Tailwind alpha support.
+   ──────────────────────────────────────────────────────────── */
+:root,
+[data-theme="dark"] {
+  --bg: 9 9 11; /* obsidian */
+  --surface: 15 15 18; /* charcoal panel */
+  --raised: 24 24 28; /* raised layer */
+  --fg: 240 238 230; /* warm ivory */
+  --muted: 158 156 150; /* secondary text */
+  --faint: 96 95 92; /* tertiary text */
+  --line: 39 39 44; /* hairlines */
+  --accent: 216 255 79; /* acid signal */
+  --accent-soft: 140 170 60;
+  --grain-opacity: 0.035;
+  color-scheme: dark;
+}
+
+[data-theme="light"] {
+  --bg: 246 245 240; /* warm paper */
+  --surface: 255 255 255;
+  --raised: 238 237 230;
+  --fg: 22 22 24;
+  --muted: 92 91 87;
+  --faint: 148 147 142;
+  --line: 222 221 213;
+  --accent: 92 122 10; /* deep signal for contrast on paper */
+  --accent-soft: 140 170 60;
+  --grain-opacity: 0.025;
+  color-scheme: light;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  html.lenis {
+    height: auto;
+  }
+
+  .lenis.lenis-smooth {
+    scroll-behavior: auto !important;
+  }
+
+  body {
+    @apply bg-bg text-fg font-body antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  ::selection {
+    background: rgb(var(--accent));
+    color: rgb(var(--bg));
+  }
+
+  /* Accessible focus ring everywhere */
+  :focus-visible {
+    outline: 2px solid rgb(var(--accent));
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+@layer components {
+  /* Page-wide film grain — gives the cinematic texture without images */
+  .grain::before {
+    content: "";
+    position: fixed;
+    inset: -50%;
+    width: 200%;
+    height: 200%;
+    pointer-events: none;
+    z-index: 60;
+    opacity: var(--grain-opacity);
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  .wrap {
+    @apply mx-auto w-full max-w-wrap px-6 md:px-10 lg:px-14;
+  }
+
+  .hairline {
+    @apply border-line;
+  }
+
+  /* Editorial section kicker — mono, tracked out, accent tick */
+  .kicker {
+    @apply font-mono text-xs uppercase tracking-[0.25em] text-muted;
+  }
+
+  .kicker::before {
+    content: "◆ ";
+    color: rgb(var(--accent));
+    font-size: 0.6em;
+    vertical-align: 2px;
+  }
+
+  /* Underline sweep for links */
+  .link-sweep {
+    background-image: linear-gradient(rgb(var(--accent)), rgb(var(--accent)));
+    background-size: 0% 1px;
+    background-position: 0 100%;
+    background-repeat: no-repeat;
+    transition: background-size 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .link-sweep:hover {
+    background-size: 100% 1px;
+  }
+}

@@ -120,7 +120,7 @@ export function CommandPalette({
     <AnimatePresence>
       {open && (
         <motion.div
-          className="fixed inset-0 z-[90] flex items-start justify-center bg-black/60 px-4 pt-[18vh] backdrop-blur-sm"
+          className="fixed inset-0 z-[90] flex items-start justify-center overflow-y-auto bg-black/60 px-4 pb-4 pt-[max(5rem,18vh)] backdrop-blur-sm"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
@@ -131,7 +131,7 @@ export function CommandPalette({
           aria-label="Command palette"
         >
           <motion.div
-            className="w-full max-w-lg overflow-hidden rounded-2xl border border-line bg-surface shadow-2xl shadow-black/40"
+            className="w-full max-w-lg max-h-[calc(100dvh-6rem)] overflow-hidden rounded-2xl border border-line bg-surface shadow-2xl shadow-black/40"
             initial={{ opacity: 0, scale: 0.96, y: -12 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.96, y: -12 }}

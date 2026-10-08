@@ -142,4 +142,38 @@ export const projects: Project[] = [
     ],
     accentHue: 215,
   },
+  {
+    slug: "dense-encoder-fine-tuning-wiki-qa",
+    index: "04",
+    title: "Dense Encoder Fine-Tuning for WikiQA",
+    tagline: "A domain-specific sentence encoder that makes open-domain QA retrieval sharper.",
+    date: "2026",
+    stack: ["Python", "Sentence Transformers", "Hugging Face", "Pandas"],
+    architecture: [
+      "WikiQA dataset",
+      "Deduplicate contexts",
+      "BGE-small encoder",
+      "MNRL fine-tuning",
+      "Dense embeddings",
+      "Top-5 retrieval",
+    ],
+    challenge:
+      "Generic embedding models can miss the relationship between question wording and answer context, while duplicate documents create conflicting in-batch negatives during contrastive training.",
+    solution:
+      "Fine-tuned BAAI/bge-small-en-v1.5 on cleaned WikiQA question-document pairs with MultipleNegativesRankingLoss, deduplicating contexts before training to prevent representation collapse and using the modern SentenceTransformerTrainer API.",
+    impact: [
+      { value: "+10pp", label: "Recall@5 improvement" },
+      { value: "0.89", label: "post-fine-tune Recall@5" },
+      { value: "MNRL", label: "contrastive training objective" },
+    ],
+    description:
+      "An experiment in adapting a lightweight dense encoder for retrieval-heavy QA. The resulting model, nmngpt0/bge-qa-lilsmall01, turns the WikiQA pipeline into a reusable embedding model for comparing questions with relevant passages.",
+    links: [
+      {
+        label: "GitHub",
+        url: "https://github.com/itz-naman007/Dense-Encoder-Fine-Tuning-Wiki-QA-",
+      },
+    ],
+    accentHue: 164,
+  },
 ];
